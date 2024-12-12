@@ -11,11 +11,15 @@ import {FooterComponent} from './componants/footer/footer.component';
 import { ChefsComponent } from './componants/chefs/chefs.component';
 import { ContactInfoComponent } from './componants/contact-info/contact-info.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 // http://localhost:4200/
 export const routes: Routes = [
 
-  // http://localhost:4200/active
+  // http://localhost:4200
+  {path: 'category/:id', component: ProductsComponent},
+  {path: 'products/:key', component: ProductsComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'cardDetails', component: CardDetailsComponent},
   {path: 'contact-info', component: ContactInfoComponent},
@@ -46,7 +50,9 @@ export const routes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    NgbPaginationModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [

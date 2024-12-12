@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Chefs} from "../../model/chefs";
+import {ChefService} from "../../service/chef.service";
 
 @Component({
   selector: 'app-chefs',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChefsComponent implements OnInit {
 
-  constructor() { }
+  chefs: Chefs[] = [];
+
+  constructor(private chefsService: ChefService) {
+  }
 
   ngOnInit(): void {
+    this.getAllChefs()
+  }
+
+  getAllChefs(){
+    this.chefsService.getAllChefs().subscribe(
+      data => {
+        this.chefs = data;
+      }
+    )
   }
 
 }
