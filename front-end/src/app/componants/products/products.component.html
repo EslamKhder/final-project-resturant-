@@ -17,14 +17,41 @@
               </div>
             </div>
 
-            <div *ngIf="products.length === 0">
-              {{messageResultEn}} <br>
-              {{messageResultAr}} <br>
+            <div *ngIf="productSize === -1">
+              <p class="no-products-message">{{messageResultEn}}</p> <br>
+              <p class="no-products-message-ar">{{messageResultAr}}</p> <br>
 
             </div>
 
-            <div class="col-md-9 pag" style="padding-left: 30%">
+            <div *ngIf="productSize === -2" class="waiting-message">
+              🌟 Stay tuned! Something amazing is coming soon. 🚀
+            </div>
 
+            <div class="col-md-9 pag" style="padding-left: 30%">
+              <div *ngIf="productSize !== -2 && productSize !== 0 && productSize !== -1">
+                <ngb-pagination
+                  [(page)]="pageNumber"
+                  [pageSize]="pageSize"
+                  [collectionSize]="productsCollection"
+                  (pageChange)="doPagination()"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                >
+                </ngb-pagination>
+
+
+                <div class="sel">
+                  <span class="mr-2">Page Size</span>
+                  <select (change)="changePageSize($event)">
+                    <option>2</option>
+                    <option>5</option>
+                    <option selected="true">10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                </div>
+              </div>
+              <!--              >-->
 <!--              <ngb-pagination-->
 <!--                [(page)]="page"-->
 <!--                [pageSize]="pageLength"-->
@@ -35,21 +62,8 @@
 <!--              /ngb-pagination>-->
 <!--              >-->
 
-<!--              <ngb-pagination-->
-<!--                [pageSize]="10"-->
-<!--                [collectionSize]="40"-->
-<!--              >-->
 <!--              </ngb-pagination>-->
-<!--              <div class="sel">-->
-<!--                <span class="mr-2">Page Size</span>-->
-<!--                <select (change)="pageSize($event)">-->
-<!--                  <option>2</option>-->
-<!--                  <option>5</option>-->
-<!--                  <option selected="true">10</option>-->
-<!--                  <option>20</option>-->
-<!--                  <option>50</option>-->
-<!--                </select>-->
-<!--              </div>-->
+
             </div>
           </div>
         </div>

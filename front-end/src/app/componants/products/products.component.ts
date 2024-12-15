@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from "../../model/category";
-import {CategoryServiceService} from "../../service/category-service.service";
 import {Product} from "../../model/product";
 import {ProductService} from "../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
@@ -15,6 +13,14 @@ export class ProductsComponent implements OnInit{
   products: Product[] = [];
   messageResultEn: string = "";
   messageResultAr: string = "";
+  productSize: number = 0;
+  // pageNumber refere to  page you need to return
+  pageNumber: number = 1;
+  // pageSize refere to  size of product on page
+  pageSize: number = 10;
+  // productsCollection refere to  size product
+  productsCollection: number = 0;
+
   constructor(private productService: ProductService,
               private activatedRoute:ActivatedRoute) {
   }
@@ -42,7 +48,13 @@ export class ProductsComponent implements OnInit{
   }
 
   getAllProducts(){
-    this.productService.getAllProduct().subscribe(
+    this.productService.getProductSize().subscribe(
+      data => {
+        this.productsCollection = data;
+        this.productSize = data
+      }
+    )
+    this.productService.getAllProduct(this.pageNumber-1, this.pageSize).subscribe(
       data => {
         this.products = data;
       }
@@ -50,27 +62,42 @@ export class ProductsComponent implements OnInit{
   }
 
   getProductsByCategoryId(categoryId){
-    this.productService.getProductById(categoryId).subscribe(
+    this.productService.getProductSizeByCategoryId(categoryId).subscribe(
+      data => {
+        this.productsCollection = data;
+        this.productSize = data
+      }
+    )
+    this.productService.getProductById(categoryId, this.pageNumber-1, this.pageSize).subscribe(
       data => {
         this.products = data;
+        if (this.products.length === 0) {
+          this.productSize = -2;
+        }
       }
     )
   }
 
 
   getProductsByKey(key){
-
-    this.productService.getProductByKey(key).subscribe(
+    this.productService.getProductSizeByKey(key).subscribe(
+      data => {
+        this.productsCollection = data;
+        this.productSize = data;
+      }
+    )
+    this.productService.getProductByKey(key, this.pageNumber-1, this.pageSize).subscribe(
       data => {
         // @ts-ignore
         if (data && 'status' in data && data.status === 'BAD_REQUEST') {
-          debugger
+
           // @ts-ignore
           this.messageResultEn = data.bundleMessage.message_en;
 
           // @ts-ignore
           this.messageResultAr = data.bundleMessage.message_ar;
           this.products = [];
+          this.productSize = -1;
         } else {
           this.products = data;
         }
@@ -79,4 +106,13 @@ export class ProductsComponent implements OnInit{
     )
   }
 
+  doPagination(){
+    this.finalProducts();
+  }
+
+  changePageSize(event: Event){
+    this.pageSize = +(<HTMLInputElement>event.target).value;
+    this.finalProducts();
+  }
 }
+

@@ -10,30 +10,55 @@ import {Product} from "../model/product";
 })
 export class ProductService {
 
-  allProductUrl = 'http://localhost:9090/product/getProducts';
+  baseUrl = 'http://localhost:9090/product';
+  allProductUrl = 'http://localhost:9090/product/getProducts/';
   productByCategoryIdUrl = 'http://localhost:9090/product/getProductsBy/';
   productSearchUrl = 'http://localhost:9090/product/getProductsByletter/';
   constructor(private http: HttpClient) { }
 
 
-  getAllProduct(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.allProductUrl).pipe(
+  getAllProduct(pageNumber, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.allProductUrl + "pageNumber/" + pageNumber +"/pageSize/" + pageSize).pipe(
       map(
         response => response
       )
     )
   }
 
-  getProductById(categoryId): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productByCategoryIdUrl + categoryId).pipe(
+  getProductById(categoryId, pageNumber, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productByCategoryIdUrl + categoryId + "/pageNumber/" + pageNumber +"/pageSize/" + pageSize).pipe(
       map(
         response => response
       )
     )
   }
 
-  getProductByKey(key): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productSearchUrl + key).pipe(
+  getProductByKey(key, pageNumber, pageSize): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productSearchUrl + key + "/pageNumber/" + pageNumber +"/pageSize/" + pageSize).pipe(
+      map(
+        response => response
+      )
+    )
+  }
+
+  getProductSize(): Observable<number> {
+    return this.http.get<number>(this.baseUrl + "/getProductSize").pipe(
+      map(
+        response => response
+      )
+    )
+  }
+
+  getProductSizeByCategoryId(categoryId): Observable<number> {
+    return this.http.get<number>(this.baseUrl + "/getProductSizeByCategoryId/" + categoryId).pipe(
+      map(
+        response => response
+      )
+    )
+  }
+
+  getProductSizeByKey(key): Observable<number> {
+    return this.http.get<number>(this.baseUrl + "/getProductSizeByKey/" + key).pipe(
       map(
         response => response
       )
