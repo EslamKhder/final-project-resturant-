@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../../model/product";
 import {ProductService} from "../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
+import {CartOrderService} from "../../service/cart-order.service";
+import {CartOrder} from "../../model/cart-order";
 
 @Component({
   selector: 'app-products',
@@ -22,7 +24,8 @@ export class ProductsComponent implements OnInit{
   productsCollection: number = 0;
 
   constructor(private productService: ProductService,
-              private activatedRoute:ActivatedRoute) {
+              private activatedRoute:ActivatedRoute,
+              private cartOrderService: CartOrderService) {
   }
 
   ngOnInit(): void {
@@ -113,6 +116,11 @@ export class ProductsComponent implements OnInit{
   changePageSize(event: Event){
     this.pageSize = +(<HTMLInputElement>event.target).value;
     this.finalProducts();
+  }
+
+  addProduct(product: Product){
+    const orderCart = new CartOrder(product);
+    this.cartOrderService.addProductToOrder(orderCart);
   }
 }
 

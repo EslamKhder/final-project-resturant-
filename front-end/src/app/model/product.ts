@@ -3,5 +3,5 @@ export class Product {
   name: string;
   logoPath: string;
   description: string;
-  price: string;
+  price: number;
 }
