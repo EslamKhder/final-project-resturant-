@@ -12,7 +12,6 @@ import springdemo.finalprojectrestoran.dto.CategoryDto;
 
 import java.util.List;
 
-@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/Category")
 public class CategoryController {
@@ -24,6 +23,5 @@ public class CategoryController {
     @GetMapping("/getAll")
     ResponseEntity<List<CategoryDto>> categories(){
         return  ResponseEntity.ok(categoryService.getAllCategory());
-
     }
 }

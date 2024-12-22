@@ -1,6 +1,7 @@
 package springdemo.finalprojectrestoran.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import springdemo.finalprojectrestoran.model.Category;
+import springdemo.finalprojectrestoran.model.Orders;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -23,4 +27,5 @@ public class ProductDto {
 
 
     private Category category;
+    private List<Orders> order;
 }
