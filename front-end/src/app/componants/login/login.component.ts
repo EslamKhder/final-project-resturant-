@@ -19,6 +19,26 @@ export class LoginComponent implements OnInit {
   }
 
   login(email, password) {
+    if (email === '') {
+      this.messageResultAr = "يجب ادخال الايميل"
+      this.messageResultEn = "please enter your email"
+      setTimeout(() => {
+        this.messageResultEn = '';
+        this.messageResultAr = '';
+      }, 3000);
+      return;
+    }
+
+    if (password === '') {
+      this.messageResultAr = "يجب ادخال الرقم السري";
+      this.messageResultEn = "please enter your password";
+      setTimeout(() => {
+        this.messageResultEn = '';
+        this.messageResultAr = '';
+      }, 3000);
+      return;
+    }
+
     this.authService.loginClient(email, password).subscribe(
       data => {
         if (data && 'status' in data && data.status === 'BAD_REQUEST') {
@@ -29,8 +49,11 @@ export class LoginComponent implements OnInit {
           // @ts-ignore
           this.messageResultAr = data.bundleMessage.message_ar;
 
-          alert(this.messageResultEn)
-          alert(this.messageResultAr)
+          setTimeout(() => {
+            this.messageResultEn = '';
+            this.messageResultAr = '';
+          }, 3000);
+
         } else {
           sessionStorage.setItem("token", "Bearer " + data.token)
           this.route.navigateByUrl("/products");

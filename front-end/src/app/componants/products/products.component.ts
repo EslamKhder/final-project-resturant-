@@ -51,14 +51,17 @@ export class ProductsComponent implements OnInit{
   }
 
   getAllProducts(){
+
     this.productService.getProductSize().subscribe(
       data => {
+        debugger
         this.productsCollection = data;
         this.productSize = data
       }
     )
     this.productService.getAllProduct(this.pageNumber-1, this.pageSize).subscribe(
       data => {
+        debugger
         this.products = data;
       }
     )

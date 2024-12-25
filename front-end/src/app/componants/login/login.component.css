@@ -184,3 +184,73 @@ input[type="radio"]{
   font-weight: 500;
   cursor: pointer;
 }
+
+.notificationEn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 150px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  padding: 15px 20px;
+  background: darkred;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownFadeIn 0.5s forwards;
+}
+
+@keyframes slideDownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification .close-btn {
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.notification .close-btn:hover {
+  color: #ffcccc;
+}
+
+.notificationAr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 250px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  padding: 15px 20px;
+  background: darkred;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownFadeIn 0.5s forwards;
+}

@@ -16,19 +16,21 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 import { LoginComponent } from './componants/login/login.component';
 import { SignupComponent } from './componants/signup/signup.component';
 import {AuthInterceptor} from "./service/intraceptor/auth.interceptor";
+import {RouteActivateLoginService} from "./service/activate/route-activate-login.service";
+import {RouteActivateLogoutService} from "./service/activate/route-activate-logout.service";
 
 // http://localhost:4200/
 export const routes: Routes = [
 
   // http://localhost:4200
-  {path: 'category/:id', component: ProductsComponent},
-  {path: 'products/:key', component: ProductsComponent},
-  {path: 'products', component: ProductsComponent},
-  {path: 'cardDetails', component: CardDetailsComponent},
-  {path: 'contact-info', component: ContactInfoComponent},
-  {path: 'chefs', component: ChefsComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {path: 'category/:id', component: ProductsComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'products/:key', component: ProductsComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'products', component: ProductsComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'cardDetails', component: CardDetailsComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'contact-info', component: ContactInfoComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'chefs', component: ChefsComponent, canActivate: [RouteActivateLoginService]},
+  {path: 'login', component: LoginComponent, canActivate: [RouteActivateLogoutService]},
+  {path: 'signup', component: SignupComponent, canActivate: [RouteActivateLogoutService]},
   // http://localhost:4200/
   {path: '', redirectTo: '/products', pathMatch: 'full'},
 

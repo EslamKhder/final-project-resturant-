@@ -19,9 +19,12 @@ import springdemo.finalprojectrestoran.dto.ProductDto;
 import springdemo.finalprojectrestoran.model.ClientModels.Client;
 import springdemo.finalprojectrestoran.model.Orders;
 import springdemo.finalprojectrestoran.model.Product;
+import springdemo.finalprojectrestoran.util.UserCode;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl  implements OrderService {
@@ -45,20 +48,23 @@ public class OrderServiceImpl  implements OrderService {
 //    }
 
     @Override
-    public String saveOrder(OrdersDto ordersDto) {
+    public Map<String, String> saveOrder(OrdersDto ordersDto) {
 
         List<Product> products = ProductMapper.PRODUCT_MAPPER.toEntityList(productService.findProductsByIds(ordersDto.getProductsIds()));
         // TO DO  get client from auth context
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Client client = null;
+        Client client = (Client) authentication.getPrincipal();
 
         Orders orders = OrderMapper.ORDER_MAPPER.toEntity(ordersDto);
         orders.setClient(client);
         orders.setProducts(products);
 
+        orders.setCode(UserCode.extractCode());
         ordersRepository.save(orders);
 
-        return orders.getCode();
+        Map<String, String> response = new LinkedHashMap<>();
+        response.put("code", orders.getCode());
+        return response;
     }
 
 

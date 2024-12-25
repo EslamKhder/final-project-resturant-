@@ -34,4 +34,8 @@ export class AuthService {
   isUserLogin(){
     return sessionStorage.getItem("token") !== null && sessionStorage.getItem("token") !== undefined;
   }
+
+  logOutClient(){
+    sessionStorage.removeItem("token")
+  }
 }

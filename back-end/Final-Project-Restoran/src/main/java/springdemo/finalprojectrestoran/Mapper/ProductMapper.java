@@ -14,6 +14,7 @@ public interface ProductMapper {
     ProductMapper PRODUCT_MAPPER = Mappers.getMapper(ProductMapper.class);
 
     @Mapping(target = "category", ignore = true)
+    @Mapping(target = "order", ignore = true)
     ProductDto toDto(Product product);
     List<ProductDto> toDtoList(List<Product> products);
 

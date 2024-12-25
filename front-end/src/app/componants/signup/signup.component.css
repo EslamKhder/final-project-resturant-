@@ -104,16 +104,16 @@ input[type="radio"]{
   display: flex;
   width: 200%;
 }
-.form-container .form-inner form{
+.form-container .form-inner .login{
   width: 50%;
   transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
-.form-inner form .field{
+.form-inner .login .field{
   height: 50px;
   width: 100%;
   margin-top: 20px;
 }
-.form-inner form .field input{
+.form-inner .login .field input{
   height: 100%;
   width: 100%;
   outline: none;
@@ -124,41 +124,40 @@ input[type="radio"]{
   font-size: 17px;
   transition: all 0.3s ease;
 }
-.form-inner form .field input:focus{
+.form-inner .login .field input:focus{
   border-color: #1a75ff;
-  /* box-shadow: inset 0 0 3px #fb6aae; */
 }
-.form-inner form .field input::placeholder{
+.form-inner .login .field input::placeholder{
   color: #999;
   transition: all 0.3s ease;
 }
-form .field input:focus::placeholder{
+.form-inner .login .field input:focus::placeholder{
   color: #1a75ff;
 }
-.form-inner form .pass-link{
+.form-inner .login .pass-link{
   margin-top: 5px;
 }
-.form-inner form .signup-link{
+.form-inner .login .signup-link{
   text-align: center;
   margin-top: 30px;
 }
-.form-inner form .pass-link a,
-.form-inner form .signup-link a{
+.form-inner .login .pass-link a,
+.form-inner .login .signup-link a{
   color: #1a75ff;
   text-decoration: none;
 }
-.form-inner form .pass-link a:hover,
-.form-inner form .signup-link a:hover{
+.form-inner .login .pass-link a:hover,
+.form-inner .login .signup-link a:hover{
   text-decoration: underline;
 }
-form .btn{
+.login .btn{
   height: 50px;
   width: 100%;
   border-radius: 15px;
   position: relative;
   overflow: hidden;
 }
-form .btn .btn-layer{
+.login .btn .btn-layer{
   height: 100%;
   width: 300%;
   position: absolute;
@@ -168,24 +167,9 @@ form .btn .btn-layer{
   border-radius: 15px;
   transition: all 0.4s ease;;
 }
-form .btn:hover .btn-layer{
+.login .btn:hover .btn-layer{
   left: 0;
 }
-/*form .btn input[type="submit"]{*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  z-index: 1;*/
-/*  position: relative;*/
-/*  background: none;*/
-/*  border: none;*/
-/*  color: #fff;*/
-/*  padding-left: 0;*/
-/*  border-radius: 15px;*/
-/*  font-size: 20px;*/
-/*  font-weight: 500;*/
-/*  cursor: pointer;*/
-/*}*/
-
 .submit{
   height: 100%;
   width: 100%;
@@ -201,3 +185,72 @@ form .btn:hover .btn-layer{
   cursor: pointer;
 }
 
+.notificationEn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 150px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  padding: 15px 20px;
+  background: darkred;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownFadeIn 0.5s forwards;
+}
+
+@keyframes slideDownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification .close-btn {
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.notification .close-btn:hover {
+  color: #ffcccc;
+}
+
+.notificationAr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 250px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  padding: 15px 20px;
+  background: darkred;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDownFadeIn 0.5s forwards;
+}

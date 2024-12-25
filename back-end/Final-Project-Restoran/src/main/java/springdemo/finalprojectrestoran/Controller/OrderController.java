@@ -9,6 +9,7 @@ import springdemo.finalprojectrestoran.dto.OrdersDto;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -17,8 +18,7 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/saveOrder")
-    ResponseEntity<Void> SaveOrder(@RequestBody OrdersDto ordersDto) {
-       orderService.saveOrder(ordersDto);
-       return ResponseEntity.created(URI.create("/orders/saveOrder")).build();
+    ResponseEntity<Map<String, String>> SaveOrder(@RequestBody OrdersDto ordersDto) {
+       return ResponseEntity.created(URI.create("/orders/saveOrder")).body(orderService.saveOrder(ordersDto));
     }
 }
